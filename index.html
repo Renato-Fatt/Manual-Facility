@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Guia para produção de Banners — Desktop e Mobile | Facility</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="hero-familia.webp"
+      imagesrcset="hero-familia.webp 1x, hero-familia@2x.webp 2x"
+      fetchpriority="high">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS  (extraídos das variáveis do arquivo Figma)
+   ============================================================ */
+:root{
+  /* Cores principais novas */
+  --verde-1:#00332a;
+  --verde-2:#017632;
+  --verde-4:#21da79;
+  --verde-5:#8ffe98;
+  /* Cores principais */
+  --verde:#567e0e;
+  --verde-escuro:#324807;
+  --verde-lima:#d9e89e;
+  /* Cores globais / verde */
+  --verde-40:#d6ff8e;
+  --verde-60:#afe450;
+  /* Cores de apoio */
+  --preto:#060606;
+  --chumbo:#363435;
+  --branco:#fafafa;
+  --grafite:#1d1e1e;
+  --destaque-hero:#87e142;
+
+  /* Tipografia — Gotham e Arkipelago são fontes licenciadas.
+     Substitua os valores abaixo pelas famílias reais quando as tiver. */
+  --font-titulo:"Montserrat", "Gotham", system-ui, sans-serif;
+  --font-texto:"Montserrat", "Gotham", system-ui, sans-serif;
+  --font-script:"Caveat", "Arkipelago", cursive;
+
+  --container:1140px;
+  --gutter:113px;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{ -webkit-text-size-adjust:100%; }
+body{
+  margin:0;
+  background:#fff;
+  color:var(--preto);
+  font-family:var(--font-texto);
+  overflow-x:hidden;
+}
+img{display:block;max-width:none;}
+p{margin:0;}
+
+.container{
+  width:100%;
+  max-width:var(--container);
+  margin-inline:auto;
+  padding-inline:24px;
+}
+@media (min-width:1366px){ .container{ padding-inline:0; } }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position:relative;
+  background:var(--verde-1);
+  overflow:hidden;
+  min-height:550px;
+  display:flex;
+  align-items:center;
+}
+.hero__ring{
+  position:absolute;
+  left:calc(50% - 683px + 804px);
+  top:59px;
+  width:758px;
+  height:706px;
+  border:100px solid var(--verde-2);
+  border-radius:231px;
+  pointer-events:none;
+}
+.hero__art{
+  position:absolute;
+  left:calc(50% - 683px + 620px);
+  top:50px;
+  width:890px;
+  height:500px;
+  pointer-events:none;
+}
+.hero__art picture{display:block;width:100%;height:100%;}
+.hero__art img{width:100%;height:100%;object-fit:cover;}
+/* brilho suave no lugar da arte enquanto ela carrega — some quando ela entra.
+   Precisa ser irmao de .hero__art, nao filho: o pai fica em opacity 0. */
+.hero__ph{
+  position:absolute;
+  left:calc(50% - 683px + 620px);
+  top:50px;
+  width:890px;
+  height:500px;
+  pointer-events:none;
+  background:
+    radial-gradient(46% 58% at 52% 62%, rgba(1,118,50,.60), rgba(0,51,42,0) 72%),
+    radial-gradient(30% 40% at 72% 45%, rgba(135,225,66,.14), rgba(0,51,42,0) 70%);
+  filter:blur(18px);
+  opacity:1;
+  transition:opacity .5s ease;
+}
+.hero--pronto .hero__ph{opacity:0;}
+.hero__inner{
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:var(--container);
+  margin-inline:auto;
+  padding-inline:24px;
+}
+@media (min-width:1366px){ .hero__inner{ padding-inline:0; } }
+.hero__title{
+  max-width:562px;
+  font-family:var(--font-titulo);
+  font-weight:500;
+  font-size:56px;
+  line-height:1.1;
+  color:#fff;
+  margin:0;
+}
+.hero__title em{ font-style:normal; color:var(--destaque-hero); }
+
+/* ============================================================
+   SEÇÃO — BANNER PRINCIPAL
+   Coordenadas do Figma (canvas 1366, conteúdo a partir de x=113):
+     texto   → x 113  / y 682  / largura 461
+     mockup  → x 481  / y 550  / largura 891,49  (vaza à direita)
+   Como a seção começa em y=550, o mockup fica no topo (offset 0)
+   e o texto recebe 132px de padding-top.
+   ============================================================ */
+.intro{
+  position:relative;
+  padding-top:132px;
+  padding-bottom:40px;
+  min-height:664px;    /* y 550 → 1214 no Figma */
+}
+.intro .container{ position:relative; }
+.intro__grid{ position:relative; }
+.intro__copy{ width:461px; max-width:100%; }
+.intro__copy h2{
+  font-family:var(--font-titulo);
+  font-weight:700;
+  font-size:48px;
+  line-height:1.1;
+  color:var(--preto);
+  margin:0 0 16px;
+}
+.intro__copy p{
+  font-size:16px;
+  line-height:1.5;
+  color:var(--chumbo);
+  margin-bottom:16px;
+}
+.intro__copy strong{font-weight:700;}
+.intro__actions{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  margin-top:32px;
+}
+.btn-download{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:291px;
+  max-width:100%;
+  height:48px;
+  padding:13px 32px;
+  border:0;
+  border-radius:8px;
+  background:var(--verde);
+  color:var(--branco);
+  font-family:var(--font-titulo);
+  font-weight:500;
+  font-size:16px;
+  line-height:1.2;
+  text-decoration:none;
+  cursor:pointer;
+  transition:filter .15s ease;
+}
+.btn-download:hover{filter:brightness(1.1);}
+.btn-download:active{transform:translateY(1px);}
+.btn-download:focus-visible{outline:3px solid var(--verde-60);outline-offset:3px;}
+.btn-download .ico-psd{width:20.5px;height:20px;flex:none;}
+.btn-download .ico-dl{width:18px;height:18px;flex:none;}
+.btn-download img{width:100%;height:100%;object-fit:contain;}
+.intro__figure{
+  position:absolute;
+  left:368px;          /* 481px (Figma) − 113px (margem do container) */
+  top:-132px;          /* volta ao topo da seção, y=550 no Figma */
+  width:891.49px;
+  margin:0;
+  pointer-events:none; /* não bloqueia os botões de download */
+}
+.intro__figure img{width:100%;height:auto;}
+
+/* ============================================================
+   SEÇÃO — ESPECIFICAÇÃO DE FORMATO
+   ============================================================ */
+.spec{ padding-top:56px; }
+.spec__head{
+  display:flex;
+  align-items:center;
+  gap:24px;
+  flex-wrap:wrap;
+  margin-bottom:24px;
+}
+.spec__head h2{
+  font-family:var(--font-titulo);
+  font-weight:700;
+  font-size:48px;
+  line-height:1.1;
+  margin:0;
+  color:#000;
+}
+.spec__head h2 em{font-style:normal;color:var(--verde);}
+.badge-dim{
+  display:inline-flex;
+  align-items:center;
+  padding:8px 16px;
+  border:1px solid var(--verde);
+  border-radius:6px;
+  background:var(--verde-lima);
+  font-family:var(--font-titulo);
+  font-weight:500;
+  font-size:18px;
+  color:var(--grafite);
+  white-space:nowrap;
+}
+.badge-dim b{color:var(--verde-escuro);font-weight:500;}
+.spec__body{
+  max-width:655px;
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+  font-size:18px;
+  line-height:1.4;
+  color:var(--chumbo);
+}
+.spec__body strong{font-weight:700;}
+
+/* ============================================================
+   MOCKUPS — imagens exportadas do Figma (um request cada)
+   ============================================================ */
+.mock-label{
+  font-family:var(--font-titulo);
+  font-weight:500;
+  font-size:18px;
+  color:var(--verde-1);
+  margin:48px 0 12px;
+}
+.mock-pic{display:block;}
+.mock-pic img{
+  display:block;
+  width:100%;
+  height:auto;          /* width/height no HTML reservam o espaco (evita CLS) */
+  background:#0d0d0d;   /* placeholder enquanto carrega */
+}
+.intro__figure picture{display:block;}
+
+/* ============================================================
+   ANIMAÇÕES DE ENTRADA
+   Estado inicial aplicado via [data-anim]; a classe .is-in é
+   adicionada por IntersectionObserver quando o elemento entra
+   na viewport. O atraso vem da custom property --d.
+   ============================================================ */
+[data-anim]{
+  opacity:0;
+  transition:opacity .75s cubic-bezier(.22,.61,.36,1),
+             transform .75s cubic-bezier(.22,.61,.36,1);
+  transition-delay:var(--d,0ms);
+  will-change:opacity,transform;
+}
+[data-anim="up"]   {transform:translateY(28px);}
+[data-anim="right"]{transform:translateX(40px);}
+[data-anim="zoom"] {transform:scale(.94);}
+[data-anim="fade"] {transform:none;}
+[data-anim].is-in{opacity:1;transform:none;}
+
+.hero__art{
+  opacity:0;
+  transform:translateX(48px);
+  transition:opacity .45s ease-out,
+             transform .6s cubic-bezier(.22,.61,.36,1);
+}
+.hero__art.is-in{opacity:1;transform:none;}
+
+/* o anel decorativo cresce a partir do centro */
+.hero__ring{
+  opacity:0;
+  transform:scale(.88);
+  transition:opacity 1.1s ease, transform 1.1s cubic-bezier(.22,.61,.36,1);
+}
+.hero__ring.is-in{opacity:1;transform:scale(1);}
+
+@media (prefers-reduced-motion:reduce){
+  [data-anim],
+  .hero__art,
+  .hero__ring{
+    opacity:1 !important;
+    transform:none !important;
+    transition:none !important;
+  }
+  .hero__ph{display:none;}
+}
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+@media (max-width:1200px){
+  /* abaixo da largura do canvas o mockup volta ao fluxo, empilhado */
+  .intro{padding-top:64px;min-height:0;}
+  .intro__copy{width:100%;}
+  .intro__figure{
+    position:static;
+    width:100%;
+    margin-top:32px;
+    pointer-events:auto;
+  }
+  .hero__ring,.hero__art,.hero__ph{display:none;}
+  .hero{min-height:360px;padding-block:56px;}
+}
+@media (max-width:720px){
+  .hero__title{font-size:34px;}
+  .intro__copy h2,.spec__head h2{font-size:32px;}
+  .spec__body{font-size:16px;}
+  .badge-dim{font-size:15px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================ HERO ============================ -->
+<header class="hero">
+  <div class="hero__ring" aria-hidden="true"></div>
+  <div class="hero__ph" aria-hidden="true"></div>
+  <div class="hero__art" aria-hidden="true">
+    <picture>
+      <source type="image/webp"
+              srcset="hero-familia.webp 1x, hero-familia@2x.webp 2x">
+      <img src="hero-familia.png"
+           width="890" height="500" fetchpriority="high" decoding="async"
+           alt="Família ao lado de um carro">
+    </picture>
+  </div>
+  <div class="hero__inner">
+    <h1 class="hero__title" data-anim="up" style="--d:120ms">Guia para produção de Banners para <em>Desktop e Mobile</em></h1>
+  </div>
+</header>
+
+<main>
+
+  <!-- ==================== BANNER PRINCIPAL ==================== -->
+  <section class="intro">
+    <div class="container">
+      <div class="intro__grid">
+        <div class="intro__copy">
+          <h2 data-anim="up">Banner Principal</h2>
+          <p data-anim="up" style="--d:80ms">Para garantir uma boa experiência para o usuário, <strong>o banner principal necessita de duas imagens diferentes, uma para visualização em desktop e outra para dispositivos móveis</strong>, devido à ”responsividade” do site.</p>
+          <p data-anim="up" style="--d:160ms">Confira a seguir as informações necessárias para a criação desses dois formatos.</p>
+
+          <div class="intro__actions">
+            <a class="btn-download"
+               data-anim="up" style="--d:240ms"
+               href="Banner-Desktop.psd"
+               download="Banner-Desktop.psd"
+               type="image/vnd.adobe.photoshop">
+              <span class="ico-psd" aria-hidden="true"><img src="icone-psd.svg" width="21" height="20" alt=""></span>
+              PSD banner Desktop
+              <span class="ico-dl" aria-hidden="true"><img src="icone-download.svg" width="18" height="18" alt=""></span>
+            </a>
+            <a class="btn-download"
+               data-anim="up" style="--d:320ms"
+               href="Banner-Mobile.psd"
+               download="Banner-Mobile.psd"
+               type="image/vnd.adobe.photoshop">
+              <span class="ico-psd" aria-hidden="true"><img src="icone-psd.svg" width="21" height="20" alt=""></span>
+              PSD banner Mobile
+              <span class="ico-dl" aria-hidden="true"><img src="icone-download.svg" width="18" height="18" alt=""></span>
+            </a>
+          </div>
+        </div>
+
+        <figure class="intro__figure" data-anim="right" style="--d:200ms">
+          <picture>
+      <source type="image/webp"
+              srcset="mockup-dispositivos.webp 1x, mockup-dispositivos@2x.webp 2x">
+      <img src="mockup-dispositivos.png"
+           width="891" height="628" loading="lazy" decoding="async"
+           alt="Exemplo de banner principal aplicado em desktop e mobile">
+    </picture>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FORMATO DESKTOP ==================== -->
+  <section class="spec">
+    <div class="container">
+      <div class="spec__head">
+        <h2 data-anim="up">Formato de <em>Banner Desktop</em></h2>
+        <span class="badge-dim" data-anim="zoom" style="--d:180ms">Dimensões:&nbsp;<b>2560px X 660px</b></span>
+      </div>
+      <div class="spec__body">
+        <p data-anim="up" style="--d:80ms">Esse formato é apropriado para visualização em laptops e desktops com monitores Full HD e Ultra wide.</p>
+        <p data-anim="up" style="--d:160ms">Recomendamos que a informação principal da arte fique dentro da <strong>”área segura”,</strong> assim garantimos que sempre será visível para o usuário.</p>
+      </div>
+
+      <p class="mock-label" data-anim="up">Guia de tamanho</p>
+      <picture class="mock-pic" data-anim="up" style="--d:80ms">
+      <source type="image/webp"
+              srcset="guia-desktop.webp 1x, guia-desktop@2x.webp 2x">
+      <img src="guia-desktop.png"
+           width="1140" height="308" loading="lazy" decoding="async"
+           alt="Guia de tamanho do banner desktop: área de menu 1100x134, área segura 1100x494 e área de indicadores 1100x62">
+    </picture>
+
+      <p class="mock-label" data-anim="up">Aplicação: 1920x1080</p>
+      <picture class="mock-pic" data-anim="up" style="--d:80ms">
+      <source type="image/webp"
+              srcset="app-desktop.webp 1x, app-desktop@2x.webp 2x">
+      <img src="app-desktop.png"
+           width="1140" height="410" loading="lazy" decoding="async"
+           alt="Banner desktop aplicado, com cabeçalho e menu do site sobre a arte">
+    </picture>
+    </div>
+  </section>
+
+  <!-- ==================== FORMATO MOBILE ==================== -->
+  <section class="spec">
+    <div class="container">
+      <div class="spec__head">
+        <h2 data-anim="up">Formato de <em>Banner Mobile</em></h2>
+        <span class="badge-dim" data-anim="zoom" style="--d:180ms">Dimensões:&nbsp;<b>991px X 690px</b></span>
+      </div>
+      <div class="spec__body">
+        <p data-anim="up" style="--d:80ms">Para dispositivos móveis, como tablets e smartphones, <strong>o tamanho ideal para a imagem é de 991 x 690 pixels.</strong> Este tamanho foi escolhido para garantir uma visualização adequada em diferentes tamanhos de tela.</p>
+        <p data-anim="up" style="--d:160ms">Recomendamos que a informação principal da arte fique dentro da <strong>”área segura”,</strong> assim garantimos que sempre será visível para o usuário.</p>
+      </div>
+
+      <p class="mock-label" data-anim="up">Guia de tamanho</p>
+      <picture class="mock-pic" data-anim="up" style="--d:80ms">
+      <source type="image/webp"
+              srcset="guia-mobile.webp 1x, guia-mobile@2x.webp 2x">
+      <img src="guia-mobile.png"
+           width="991" height="690" loading="lazy" decoding="async"
+           alt="Guia de tamanho do banner mobile: área de menu 104px, área segura 342x524 e área de bullets 62px">
+    </picture>
+
+      <p class="mock-label" data-anim="up">Aplicação: 390x640</p>
+      <picture class="mock-pic" data-anim="up" style="--d:80ms">
+      <source type="image/webp"
+              srcset="app-mobile.webp 1x, app-mobile@2x.webp 2x">
+      <img src="app-mobile.png"
+           width="991" height="690" loading="lazy" decoding="async"
+           alt="Banner mobile aplicado, com destaque para a viewport de 390px">
+    </picture>
+    </div>
+  </section>
+
+  <div style="height:96px"></div>
+</main>
+
+<script>
+/* ============================================================
+   ANIMAÇÕES DE ENTRADA
+   ============================================================ */
+(function(){
+  const heroArt  = document.querySelector(".hero__art");
+  const heroImg  = heroArt && heroArt.querySelector("img");
+  const heroRing = document.querySelector(".hero__ring");
+
+  const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mostrar = el => el && el.classList.add("is-in");
+
+  /* ---- arte do hero ----
+     Ela é grande e pinta progressivamente enquanto baixa, o que dá
+     a impressão de "carregar por partes". Em vez de exibi-la desde o
+     início, mantemos opacidade 0 e revelamos só quando a imagem
+     estiver totalmente decodificada — aí ela entra de uma vez. */
+  if (heroImg) {
+    let revelado = false;
+    const revelar = () => {
+      if (revelado) return;
+      revelado = true;
+      mostrar(heroArt);
+      document.querySelector(".hero").classList.add("hero--pronto");
+    };
+
+    if (heroImg.complete && heroImg.naturalWidth) {
+      revelar();
+    } else if (heroImg.decode) {
+      heroImg.decode().then(revelar).catch(revelar);
+    } else {
+      heroImg.addEventListener("load", revelar, { once:true });
+      heroImg.addEventListener("error", revelar, { once:true });
+    }
+    // Em rede lenta, esperar a decodificação completa deixaria o espaço vazio
+    // por tempo demais. Passado esse limite, mostramos assim mesmo — ver a
+    // imagem pintando é melhor que não ver imagem nenhuma.
+    setTimeout(revelar, 1800);
+  } else {
+    mostrar(heroArt);
+  }
+
+  mostrar(heroRing);
+
+  /* ---- demais elementos, por scroll ---- */
+  const alvos = [...document.querySelectorAll("[data-anim]")];
+
+  if (semMovimento || !("IntersectionObserver" in window)) {
+    alvos.forEach(mostrar);
+    return;
+  }
+
+  const io = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      if (!entrada.isIntersecting) return;
+      entrada.target.classList.add("is-in");
+      io.unobserve(entrada.target);   // anima uma vez só
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: "0px 0px -8% 0px"
+  });
+
+  alvos.forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
